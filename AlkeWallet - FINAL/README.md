@@ -82,10 +82,7 @@ Tabla [transaccion]
 
 
 
-# Proceso
-||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
-|||||||||||||||||||||||||| Proceso  (Con capturas en documento pdf entregable) |||||||||||||||||||||||||
-||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
+# Proceso (Con capturas en documento pdf entregable)
 
 LECCIÓN 1: Crear estructura inicial
   1.- Crear código para base de datos del alkewallet:
@@ -125,7 +122,7 @@ LECCIÓN 2: Consultas a una o varias tablas
 
 Tarea Extra Lección 4:  Modificar la tabla usuario para añadir la fecha de registro
 
-# Explicaciones Extra
+# Explicaciones Adicionales
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
 |||||||||||||||||||||||||| Algunas Explicaciones Extra    ||||||||||||||||||||||||||||||||||||||||
 ||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||
@@ -140,7 +137,6 @@ Tercera Forma Normal (3FN): No existen dependencias transitivas.                
 Beneficio práctico: Si el nombre de una moneda cambia, solo se actualiza "un registro" en 'moneda', y todos los usuarios y transacciones que la referenciaban quedan correctos automáticamente.
 
 La base de datos de Alke Wallet se encuentra normalizada hasta la 3FN para garantizar la integridad y evitar la redundancia de datos. No se procedió con una normalización mayor para mantener la simplicidad de las consultas JOIN y optimizar el tiempo de respuesta del motor MySQL en las operaciones de balance de saldo.
-
 
 ---
 
@@ -161,23 +157,23 @@ DEFAULT         | saldo, created_at    | Valores iniciales automáticos
 Consultas principales (LECCIÓN 2)
 
 SELECT basicas
-- Listar todos los usuarios con su nombre y saldo actual
-- Listar las monedas disponibles en el sistema
+-- Listar todos los usuarios con su nombre y saldo actual
+-- Listar las monedas disponibles en el sistema
 
 WHERE con AND (sobre usuario)
-- Usuarios con saldo alto (mayor a 1000) Y que usen una moneda específica
+ -- Usuarios con saldo alto (mayor a 1000) Y que usen una moneda específica
 WHERE con OR (sobre transaccion)
-- Buscar transacciones que sean "grandes" (más de 50.000) O muy recientes
+-- Buscar transacciones que sean "grandes" (más de 50.000) O muy recientes
 WHERE NOT (sobre moneda)
-- Buscar todas las monedas EXCEPTO las que son de tipo 'Fiduciaria'
+-- Buscar todas las monedas EXCEPTO las que son de tipo 'Fiduciaria'
 
 INNER JOIN
-- Ver el historial de transacciones con los nombres de los emisores
-- Ver el historial de transacciones con los nombres de los receptores
-- Ver el historial completo con emisores y receptores
+-- Ver el historial de transacciones con los nombres de los emisores
+-- Ver el historial de transacciones con los nombres de los receptores
+-- Ver el historial completo con emisores y receptores
 
 Subconsulta 
-- Total de transacciones por usuario: Obtener el nombre del usuario y cuántas transacciones ha realizado en total
+-- Total de transacciones por usuario: Obtener el nombre del usuario y cuántas transacciones ha realizado en total
 
 ---
 
@@ -189,3 +185,12 @@ Principios ACID
 "Consistencia": La BD pasa de un estado válido a otro válido               | Restricciones CHECK, FK y NOT NULL validan el estado
 "Aislamiento": Las transacciones concurrentes no interfieren entre sí      | Motor InnoDB provee aislamiento por defecto (REPEATABLE READ)
 "Durabilidad": Los cambios confirmados persisten ante fallos               | InnoDB escribe en disco mediante redo log
+
+
+# Código Extra
+
+- Eliminar tablas al inicio para evitar conflictos
+- Consulta de Ranking (Top Clientes) con funciones de agregado y ordenamiento
+- Modificar email de un usuario específico (UPDATE) 
+- Clasificar usuarios según su nivel de saldo (Uso de CASE)
+- Crear historial de transacciones (CREATE VIEW)

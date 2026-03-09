@@ -158,3 +158,51 @@ ADD COLUMN created_at DATETIME DEFAULT CURRENT_TIMESTAMP;
 DESCRIBE usuario;
 -- Ver los datos (los usuarios antiguos tendrán la fecha en que ejecutaste el ALTER)
 SELECT user_id, nombre, created_at FROM usuario;*/
+
+
+-- Extras 
+/* -- Consultas de ranking (GRUPO BY, HAVING)
+-- Top 3 usuarios con mayor saldo (Ranking de riqueza)
+SELECT nombre, saldo FROM usuario ORDER BY saldo DESC LIMIT 3; 
+
+-- Usuarios que han enviado más de 3 transacciones
+SELECT u.nombre, COUNT(t.transaccion_id) AS cantidad_envios FROM usuario u JOIN transaccion t ON u.user_id = t.usuario_envio_id
+GROUP BY u.user_id -- Agrupamos por usuario para contar las transacciones de cada uno
+HAVING cantidad_envios > 3; -- Having se usa para filtrar resultados después de agrupar, en este caso, para mostrar solo los usuarios que han enviado más de 3 transacciones. */
+
+/* -- Modificar email de un usuario específico (UPDATE)
+UPDATE usuario
+SET    correo_electronico = 'ana.torres.nueva@mail.com'
+WHERE  user_id = 1;
+ 
+-- Verificar cambio
+SELECT user_id, nombre, correo_electronico FROM usuario WHERE user_id = 1; */
+
+/* -- Clasificar usuarios según su nivel de saldo (Uso de CASE)
+SELECT nombre, saldo,
+    CASE -- Evaluamos el saldo para asignar una categoría a cada usuario
+        WHEN saldo < 10000 THEN 'Saldo Bajo'
+        WHEN saldo BETWEEN 10000 AND 100000 THEN 'Saldo Medio'
+        ELSE 'Saldo VIP'
+    END AS categoria_cliente 
+FROM usuario; */
+
+/* -- Crear historial de transacciones (CREATE VIEW)
+CREATE VIEW view_movimientos_recientes AS -- CREATE VIEW para crear una vista, que es una tabla virtual basada en el resultado de una consulta SELECT.
+SELECT 
+    t.transaccion_id AS ID,
+    u_envio.nombre AS Emisor,
+    u_recep.nombre AS Receptor,
+    CONCAT(m.currency_symbol, ' ', t.importe) AS Monto,
+    t.transaccion_date AS Fecha
+FROM transaccion t
+JOIN usuario u_envio ON t.usuario_envio_id = u_envio.user_id
+JOIN usuario u_recep ON t.usuario_recepcion_id = u_recep.user_id
+JOIN moneda m ON u_envio.currency_id = m.currency_id; -- m es necesario para mostrar el símbolo de la moneda en el monto, asumiendo que el emisor y receptor usan la misma moneda. 
+
+-- Para ver historial
+SELECT * FROM view_movimientos_recientes; */
+
+
+
+
