@@ -13,7 +13,14 @@ AlkeWallet es una billetera virtual cuya base de datos relacional permite a los 
 
 Estructura del repositorio:
 
-Proyecto ABP - Modulo 5/
+Proyecto Modulo 5 - Marion Escobar/
+    ──AlkeWallet - FINAL/ 
+      ── Alkewallet.sql      # Codigo completo (DDL + DML + Consultas) | Proyecto final terminado
+      ── README.md           # Este archivo de documentacion con explicaciones
+    ── diagramas/
+      ── Alkewallet.drawio   # Diagrama de relaciones (draw.io)
+      ── Alkewallet.mwb      # Diagrama generado en Workbench
+
     ── Registro avance/
       ── 1. Leccion 1/
         ── Alkewallet.sql      # Codigo solicitado en lección 1 (Creacion de base de datos, codigo inicial)
@@ -27,13 +34,6 @@ Proyecto ABP - Modulo 5/
         ── Alkewallet.sql       # Se agrega codigo solicitado en lección 3 (DML) (Simulaciones de transacciones y errores)
       ── 5. Leccion 2/
         ── Alkewallet.sql       # Se agrega codigo solicitado en lección 2 (Consultas) (Filtros dinámicos con WHERE y Operadores Lógicos)
-
-    ──AlkeWallet - FINAL/ 
-      ── Alkewallet.sql      # Codigo completo (DDL + DML + Consultas) | Proyecto final terminado
-      ── README.md           # Este archivo de documentacion con explicaciones
-    ── diagramas/
-      ── Alkewallet.drawio   # Diagrama de relaciones (draw.io)
-      ── Alkewallet.mwb      # Diagrama generado en Workbench
 
 ---
 
